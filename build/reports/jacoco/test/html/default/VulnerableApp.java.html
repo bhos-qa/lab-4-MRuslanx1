@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VulnerableApp.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">classroom</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">VulnerableApp.java</span></div><h1>VulnerableApp.java</h1><pre class="source lang-java linenums">import java.util.HashMap;
+import java.util.Map;
+
+<span class="nc" id="L4">public class VulnerableApp {</span>
+
+    // Simulated database for users and their passwords (insecure)
+<span class="nc" id="L7">    private static final Map&lt;String, String&gt; userDatabase = new HashMap&lt;&gt;();</span>
+
+    static {
+        // Hardcoded credentials (bad practice)
+<span class="nc" id="L11">        userDatabase.put(&quot;admin&quot;, &quot;password123&quot;);</span>
+<span class="nc" id="L12">        userDatabase.put(&quot;user&quot;, &quot;userpass&quot;);</span>
+<span class="nc" id="L13">    }</span>
+
+    // 1. SQL Injection vulnerability
+    public String getUserData(String username) {
+        // Vulnerable to SQL injection
+<span class="nc" id="L18">        String query = &quot;SELECT * FROM users WHERE username = '&quot; + username + &quot;'&quot;;</span>
+        // Simulated execution of query...
+<span class="nc" id="L20">        return &quot;Query executed: &quot; + query; // Return simulated output</span>
+    }
+
+    // 2. Cross-Site Scripting (XSS) vulnerability
+    public String displayComment(String comment) {
+        // No escaping of user input, allowing for XSS
+<span class="nc" id="L26">        return &quot;&lt;div&gt;&quot; + comment + &quot;&lt;/div&gt;&quot;;</span>
+    }
+
+    // 3. Insecure Direct Object References (IDOR) vulnerability
+    public String getUserDocument(String userId) {
+        // No access control checks, potentially exposing sensitive documents
+<span class="nc" id="L32">        return &quot;Retrieving document for user ID: &quot; + userId; // Dangerous exposure</span>
+    }
+
+    // 4. Improper Authentication vulnerability
+    public boolean authenticateUser(String username, String password) {
+<span class="nc" id="L37">        String storedPassword = userDatabase.get(username); // Lookup in &quot;database&quot;</span>
+        // Insecure password comparison (plaintext)
+<span class="nc bnc" id="L39" title="All 4 branches missed.">        return storedPassword != null &amp;&amp; password.equals(storedPassword);</span>
+    }
+
+    // 5. Method to process user input without validation (vulnerable)
+    public String processUserInput(String input) {
+        // Vulnerable to injection attacks
+<span class="nc" id="L45">        return &quot;Processed input: &quot; + input;</span>
+    }
+
+    // 6. Token generation with predictable pattern (vulnerable)
+    public String generateToken(String userId) {
+        // Hardcoded token pattern (easily guessable)
+<span class="nc" id="L51">        return userId + &quot;-token-12345&quot;;</span>
+    }
+
+    // 7. Vulnerable method for sensitive action (no checks)
+    public String performSensitiveAction(String userId) {
+        // Performing an action without checking user permissions
+<span class="nc" id="L57">        return &quot;Sensitive action performed for user ID: &quot; + userId;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -26,7 +26,7 @@ tasks.test {
 
 tasks.jacocoTestReport {
     reports {
-        html.required.set(true)
+        html.required = true
         xml.required = true
     }
 }

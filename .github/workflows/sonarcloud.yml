@@ -17,8 +17,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: '17' # or '11' based on your project
-          distribution: 'corretto'
+          java-version: '17'  # or '11' based on your project
+          distribution: 'corretto'  # Ensure this is correct
 
       - name: Cache Gradle packages
         uses: actions/cache@v2
@@ -38,7 +38,7 @@ jobs:
           sonar-projectName: lab-4-MRuslanx1
           sonar-projectVersion: 1.0
           sonar-host-url: https://sonarcloud.io
-          sonar-login: ${{ secrets.SONAR_SECURITY_TOKEN}} # Set this secret in GitHub
+          sonar-login: ${{ secrets.SONAR_SECURITY_TOKEN }}  # Set this secret in GitHub
 
       - name: Quality Gate Check
         uses: sonarsource/sonarcloud-github-action@v1.6
