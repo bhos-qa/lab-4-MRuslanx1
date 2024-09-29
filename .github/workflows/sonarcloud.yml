@@ -1,0 +1,47 @@
+name: SonarCloud
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    name: Build and Analyze
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17' # or '11' based on your project
+          distribution: 'corretto'
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@v1.6
+        with:
+          sonar-projectKey: bhos-qa_lab-4-MRuslanx1
+          sonar-projectName: lab-4-MRuslanx1
+          sonar-projectVersion: 1.0
+          sonar-host-url: https://sonarcloud.io
+          sonar-login: ${{ secrets.SONAR_SECURITY_TOKEN}} # Set this secret in GitHub
+
+      - name: Quality Gate Check
+        uses: sonarsource/sonarcloud-github-action@v1.6
+        with:
+          sonar-host-url: https://sonarcloud.io
+          sonar-login: ${{ secrets.SONAR_SECURITY_TOKEN }}
