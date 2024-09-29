@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CodeTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-09-29T15:58:26" hostname="RUSLAN" time="0.041">
+  <properties/>
+  <testcase name="testIsValidUser()" classname="CodeTest" time="0.03"/>
+  <testcase name="testAddTwoNumbers()" classname="CodeTest" time="0.002"/>
+  <testcase name="testCalculateDiscount()" classname="CodeTest" time="0.001"/>
+  <testcase name="testIsPrime()" classname="CodeTest" time="0.001"/>
+  <testcase name="testCalculateTax()" classname="CodeTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
