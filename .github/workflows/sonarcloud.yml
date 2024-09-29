@@ -18,7 +18,6 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'  # or '11' based on your project
-          distribution: 'corretto'  # Ensure this is correct
 
       - name: Cache Gradle packages
         uses: actions/cache@v2
