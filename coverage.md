@@ -20,4 +20,4 @@
 - Learning Output:
   - This type of coverage is more detailed than branch coverage, as it explores the internal logic of compound conditions (e.g., `&&` or `||` operators).
   - Predicate coverage tests for logical correctness in complex conditions, which is critical in ensuring the robustness of decision-making processes.
-  - Achieving full predicate coverage requires designing test cases that consider all possible combinations of conditions, which can be complex but offers higher confidence in the code’s reliability.
+  - Achieving full predicate coverage requires designing test cases that consider all possible combinations of conditions, which can be complex but offers higher confidence in the code’s reliability
